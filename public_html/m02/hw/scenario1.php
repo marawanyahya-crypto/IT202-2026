@@ -3,7 +3,7 @@
 // @ts-nocheck
 require_once "base.php";
 
-$ucid = "mt85"; // <-- set your ucid
+$ucid = "mm3275"; // <-- set your ucid
 
 // Don't edit the arrays below, they are used to test your code
 $array1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -16,20 +16,34 @@ function printOdds($arr, $arrayNumber)
     // Only make edits between the designated "Start" and "End" comments
     echo "<div class='problem-item'>";
     printScenario1ArrayInfo($arr, $arrayNumber);
-    // This should be solved without Copilot auto-completion, to toggle it, click the Copilot chat bubble at the top of the editor.
-    //  Configure inline suggestions to "Disabled Inline Suggestions" (or similar) when writing code for this problem.
-    
+
     // Challenge 1: From each passed in array, print odd values only in a single line separated by commas and a space after each comma (should not have leading or trailing commas)
     // Step 1: sketch out plan using comments (include ucid and date)
     // Step 2: Add/commit your outline of comments (required for full credit)
     // Step 3: Add code to solve the problem (add/commit as needed)
 
-    
     $output_result = "";
+
     // Start Solution Edits
-    // set solution to $output_result variable
-   
+
+    // mm3275 2026-06-22
+    // Plan:
+    // 1. Loop through the array.
+    // 2. Keep only odd values.
+    // 3. Join them with commas and spaces.
+
+    $oddValues = [];
+
+    foreach ($arr as $value) {
+        if ($value % 2 != 0) {
+            $oddValues[] = $value;
+        }
+    }
+
+    $output_result = implode(", ", $oddValues);
+
     // End Solution Edits
+
     printScenario1Output($output_result);
     echo "</div>";
 }
@@ -42,9 +56,12 @@ printOdds($array1, 1);
 printOdds($array2, 2);
 printOdds($array3, 3);
 printOdds($array4, 4);
+
 // external validation
 if(isset($_POST["array1"])){
     printOdds($_POST["array1"], 5);
 }
+
 echo "</div>";
 printFooter($ucid, 1);
+```
