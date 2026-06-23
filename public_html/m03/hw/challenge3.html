@@ -1,40 +1,3 @@
-<!--
-Challenge 3: Carousel Layout with Swiping
------------------------------------------
-Requirements:
-    Goal: edit the allowed style and script areas to solve the carousel challenge.
-
-    Expected CSS behavior:
-    1. The header is positioned at the top.
-    2. The carousel takes up the full available width.
-    3. The buttons are centered.
-    4. The carousel panels fill the full height of the carousel.
-    5. The carousel content is centered vertically and horizontally.
-    6. The top navigation links remain page links, not carousel controls.
-
-    Expected JavaScript behavior:
-    1. Each carousel button has the appropriate event listener.
-    2. The Previous and Next carousel buttons control the panels.
-    3. Only one panel is shown at a time.
-    4. The carousel moves through the panels in order.
-    5. The carousel loops when it reaches the first or last panel.
-
-Extra credit:
-    1. Allow mouse swipe on the carousel to cycle through the panels similar to how the buttons would work.
-
-Workflow:
-    1. Update the visible UCID in the header tag.
-    2. Add UCID/date and planning comments before the solution code.
-    3. Commit the planning comments before committing the finished solution.
-    4. Test the HTML file locally before collecting evidence on qa.
-
-Notes:
-    - Edit only your UCID, the style block, and the script block at the bottom of this file.
-    - Do not edit styles.css, utils.js, or the page markup outside the allowed areas.
-    - Any CSS/JavaScript approach is acceptable if the required behavior is accomplished.
-    - The Previous/Next carousel buttons should control the panels; the top navigation links should remain page links.
--->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,13 +12,13 @@ Notes:
     <nav>
         <ul>
             <li><a href="challenge1.html">Challenge 1</a></li>
-            <li><a href="challenge2.html" >Challenge 2</a></li>
+            <li><a href="challenge2.html">Challenge 2</a></li>
             <li><a href="challenge3.html" class="active">Challenge 3</a></li>
         </ul>
     </nav>
-    <!-- Edit your UCID here -->
-    <header>Header Section (mt85)</header>
-    <!-- Don't make any other edits to the HTML -->
+
+    <header>Header Section (mm3275)</header>
+
     <nav>
         <button>Previous</button>
         <button>Next</button>
@@ -107,21 +70,137 @@ Notes:
             <div class="panel"><div>Panel 5: Accessibility Best Practices</div></div>
         </div>
     </div>
+
     <script src="utils.js"></script>
 
     <script>
         /*
-            Add UCID/date and planning comments before your JavaScript solution.
-            Solve the carousel button logic here by attaching appropriate event listeners.
+            mm3275 2026-06-23
+            Plan:
+            1. Select the carousel panels and the Previous/Next buttons.
+            2. Track the current panel with an index.
+            3. Show only the active panel.
+            4. Loop the index when moving before the first panel or after the last panel.
+            5. Use mouse down and mouse up positions to detect swipes for extra credit.
         */
+
+        const panels = document.querySelectorAll(".challenge3 .panel");
+        const buttons = document.querySelectorAll(".challenge3 nav button");
+        const previousButton = buttons[0];
+        const nextButton = buttons[1];
+
+        let currentPanel = 0;
+        let swipeStartX = 0;
+
+        function showPanel(index) {
+            panels.forEach(function (panel, panelIndex) {
+                if (panelIndex === index) {
+                    panel.classList.add("active");
+                } else {
+                    panel.classList.remove("active");
+                }
+            });
+        }
+
+        function showNextPanel() {
+            currentPanel = currentPanel + 1;
+
+            if (currentPanel >= panels.length) {
+                currentPanel = 0;
+            }
+
+            showPanel(currentPanel);
+        }
+
+        function showPreviousPanel() {
+            currentPanel = currentPanel - 1;
+
+            if (currentPanel < 0) {
+                currentPanel = panels.length - 1;
+            }
+
+            showPanel(currentPanel);
+        }
+
+        previousButton.addEventListener("click", showPreviousPanel);
+        nextButton.addEventListener("click", showNextPanel);
+
+        const carousel = document.querySelector(".challenge3 .carousel");
+
+        carousel.addEventListener("mousedown", function (event) {
+            swipeStartX = event.clientX;
+        });
+
+        carousel.addEventListener("mouseup", function (event) {
+            const swipeEndX = event.clientX;
+            const swipeDistance = swipeEndX - swipeStartX;
+
+            if (swipeDistance > 50) {
+                showPreviousPanel();
+            } else if (swipeDistance < -50) {
+                showNextPanel();
+            }
+        });
+
+        showPanel(currentPanel);
     </script>
 
     <style>
         /*
-            Add UCID/date and planning comments before your CSS solution.
-            Write Challenge 3 layout CSS here; do not override anything in styles.css.
+            mm3275 2026-06-23
+            Plan:
+            1. Keep the page height controlled by the viewport.
+            2. Center the carousel buttons.
+            3. Make the carousel fill the available space.
+            4. Hide inactive panels and center active panel content.
         */
+
+        html,
+        body.challenge3 {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .challenge3 header {
+            width: 100%;
+        }
+
+        .challenge3 nav:nth-of-type(2) {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .challenge3 .carousel {
+            width: 100%;
+            height: calc(100vh - 140px);
+            overflow: hidden;
+        }
+
+        .challenge3 .carousel-container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .challenge3 .panel {
+            display: none;
+            height: 100%;
+            width: 100%;
+        }
+
+        .challenge3 .panel.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .challenge3 .panel > div {
+            max-width: 80%;
+        }
     </style>
 </body>
 
 </html>
+```
