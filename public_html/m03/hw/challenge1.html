@@ -22,6 +22,7 @@
     <main>
         <div class="content">
             <h2>Lorem Ipsum</h2>
+
             <section>
                 <ul>
                     <li>Expected layout:
@@ -34,23 +35,34 @@
                             <li>The borders around header, main, and footer should remain intact and visible.</li>
                         </ul>
                     </li>
-                    <li>Workflow:
-                        <ul>
-                            <li>Update the visible UCID in the header tag.</li>
-                            <li>Add UCID/date and planning comments before the solution code.</li>
-                            <li>Commit the planning comments before committing the finished solution.</li>
-                            <li>Test the HTML file locally before collecting evidence on qa.</li>
-                        </ul>
-                    </li>
                 </ul>
             </section>
 
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere felis. Pellentesque tincidunt,
                 mauris sed pretium vehicula, enim odio lacinia urna, vel blandit sapien turpis at enim. Suspendisse a
                 tortor vel nunc lobortis dapibus in id dolor. Morbi elementum ligula nec dictum fringilla. Sed sed
-                sagittis diam, et consequat lacus. Suspendisse non dui mauris. Vivamus molestie mattis libero, nec
-                placerat dolor imperdiet vitae. Etiam dapibus orci lacus, eu tristique ipsum sagittis in. Fusce
-                porttitor mi non consectetur dictum.</p>
+                sagittis diam, et consequat lacus.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere felis. Pellentesque tincidunt,
+                mauris sed pretium vehicula, enim odio lacinia urna, vel blandit sapien turpis at enim.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere felis. Pellentesque tincidunt,
+                mauris sed pretium vehicula, enim odio lacinia urna, vel blandit sapien turpis at enim.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere felis. Pellentesque tincidunt,
+                mauris sed pretium vehicula, enim odio lacinia urna, vel blandit sapien turpis at enim.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere felis. Pellentesque tincidunt,
+                mauris sed pretium vehicula, enim odio lacinia urna, vel blandit sapien turpis at enim.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere felis. Pellentesque tincidunt,
+                mauris sed pretium vehicula, enim odio lacinia urna, vel blandit sapien turpis at enim.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere felis. Pellentesque tincidunt,
+                mauris sed pretium vehicula, enim odio lacinia urna, vel blandit sapien turpis at enim.</p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id posuere felis. Pellentesque tincidunt,
+                mauris sed pretium vehicula, enim odio lacinia urna, vel blandit sapien turpis at enim.</p>
         </div>
     </main>
 
@@ -70,7 +82,7 @@
 
         html,
         body.challenge1 {
-            height: 100%;
+            height: 100vh;
             margin: 0;
             overflow: hidden;
         }
@@ -80,7 +92,15 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 10;
+            z-index: 100;
+        }
+
+        .challenge1 nav {
+            position: fixed;
+            top: 25px;
+            left: 0;
+            right: 0;
+            z-index: 100;
         }
 
         .challenge1 footer {
@@ -88,16 +108,17 @@
             bottom: 0;
             left: 0;
             right: 0;
-            z-index: 10;
+            z-index: 100;
         }
 
         .challenge1 main {
             position: fixed;
-            top: 100px;
-            bottom: 60px;
+            top: 70px;
+            bottom: 35px;
             left: 0;
             right: 0;
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .challenge1 .content {
@@ -107,4 +128,3 @@
 </body>
 
 </html>
-```
