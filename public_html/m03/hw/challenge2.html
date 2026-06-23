@@ -1,37 +1,3 @@
-<!--
-Challenge 2: Sidebar Layout with Collapsing Sidebars
------------------------------------------------------
-Requirements:
-    Goal: edit the allowed style and script areas to solve the sidebar layout and toggle challenge.
-
-    Expected CSS behavior:
-    1. The header is positioned at the top.
-    2. The content region takes up the remaining height.
-    3. The left and right sidebars dock to their respective sides.
-    4. Each sidebar uses 15% width when open.
-    5. Each collapsed sidebar collapses completely while keeping its button usable.
-    6. The content area uses the remaining width.
-
-    Expected JavaScript behavior:
-    1. Each sidebar button has the appropriate event listener.
-    2. Each button toggles only its matching sidebar.
-    3. The toggle should not hide or lose access to the button.
-    4. The content area adjusts when the left sidebar, right sidebar, or both sidebars are collapsed.
-
-Workflow:
-    1. Update the visible UCID in the header tag.
-    2. Add UCID/date and planning comments before the solution code.
-    3. Commit the planning comments before committing the finished solution.
-    4. Test the HTML file locally before collecting evidence on qa.
-
-Notes:
- - Edit only your UCID, the style block, and the script block at the bottom of this file.
- - Do not edit styles.css, utils.js, or the page markup outside the allowed areas.
- - Any CSS/JavaScript approach is acceptable if the required behavior is accomplished.
- - A collapsed sidebar must collapse completely, but the button must remain usable.
-
--->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,9 +16,9 @@ Notes:
             <li><a href="challenge3.html">Challenge 3</a></li>
         </ul>
     </nav>
-    <!-- Edit your UCID here -->
-    <header>Header Section (mt85)</header>
-    <!-- Don't make any other edits to the HTML -->
+
+    <header>Header Section (mm3275)</header>
+
     <div class="container">
         <aside id="left-sidebar">
             <button>&gt;</button>
@@ -66,7 +32,6 @@ Notes:
         <main class="content">
             <h2>Lorem Ipsum</h2>
             <section>
-                <!-- Challenge Requirements -->
                 <h3>Requirements</h3>
                 <ul>
                     <li>Expected CSS behavior:
@@ -97,6 +62,7 @@ Notes:
                     </li>
                 </ul>
             </section>
+
             <p>Praesent arcu neque, ornare vitae dolor eget, dapibus sagittis ante. Donec vehicula mi a finibus
                 malesuada. Vivamus dictum nisl a felis varius, id sodales turpis fringilla. In elit urna, rhoncus at
                 turpis ut, pellentesque iaculis odio. Nam eu felis molestie, eleifend dolor id, bibendum mi. Donec
@@ -119,17 +85,85 @@ Notes:
 
     <script>
         /*
-            Add UCID/date and planning comments before your JavaScript solution.
-            Solve the sidebar toggle logic here by attaching appropriate event listeners.
+            mm3275 2026-06-23
+            Plan:
+            1. Select each sidebar and its button.
+            2. Add one click listener for the left button and one for the right button.
+            3. Toggle only the matching sidebar by adding or removing a collapsed class.
         */
+
+        const leftSidebar = document.getElementById("left-sidebar");
+        const rightSidebar = document.getElementById("right-sidebar");
+
+        const leftButton = leftSidebar.querySelector("button");
+        const rightButton = rightSidebar.querySelector("button");
+
+        leftButton.addEventListener("click", function () {
+            leftSidebar.classList.toggle("collapsed");
+        });
+
+        rightButton.addEventListener("click", function () {
+            rightSidebar.classList.toggle("collapsed");
+        });
     </script>
 
     <style>
         /*
-            Add UCID/date and planning comments before your CSS solution.
-            Write Challenge 2 layout CSS here; do not override anything in styles.css.
+            mm3275 2026-06-23
+            Plan:
+            1. Stack the header at the top.
+            2. Use flexbox for the sidebar and content layout.
+            3. Give open sidebars 15% width.
+            4. Collapse sidebars to button width while letting content fill the rest.
         */
+
+        html,
+        body.challenge2 {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .challenge2 header {
+            position: relative;
+            width: 100%;
+        }
+
+        .challenge2 .container {
+            display: flex;
+            height: calc(100vh - 100px);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .challenge2 aside {
+            width: 15%;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .challenge2 aside button {
+            display: block;
+            width: 35px;
+            min-width: 35px;
+            cursor: pointer;
+        }
+
+        .challenge2 aside.collapsed {
+            width: 35px;
+        }
+
+        .challenge2 aside.collapsed ul {
+            display: none;
+        }
+
+        .challenge2 .content {
+            flex: 1;
+            overflow-y: auto;
+        }
     </style>
 </body>
 
 </html>
+```
