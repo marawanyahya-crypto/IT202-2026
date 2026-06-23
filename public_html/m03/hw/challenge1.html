@@ -71,59 +71,38 @@
     <script src="utils.js"></script>
 
     <style>
-        /*
-            mm3275 2026-06-23
-            Plan:
-            1. Make page fill viewport.
-            2. Fix header to top.
-            3. Fix footer to bottom.
-            4. Allow only main content to scroll.
-        */
+      /*
+    mm3275 2026-06-23
+    Plan:
+    1. Make the body fill the viewport.
+    2. Use flex layout so header, main, and footer stay in place.
+    3. Let only main scroll.
+*/
 
-        html,
-        body.challenge1 {
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
+html,
+body.challenge1 {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
 
-        .challenge1 header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-        }
+body.challenge1 {
+    display: flex;
+    flex-direction: column;
+}
 
-        .challenge1 nav {
-            position: fixed;
-            top: 25px;
-            left: 0;
-            right: 0;
-            z-index: 100;
-        }
+.challenge1 nav,
+.challenge1 header,
+.challenge1 footer {
+    flex-shrink: 0;
+}
 
-        .challenge1 footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-        }
-
-        .challenge1 main {
-            position: fixed;
-            top: 70px;
-            bottom: 35px;
-            left: 0;
-            right: 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .challenge1 .content {
-            min-height: 100%;
-        }
+.challenge1 main {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+}  
     </style>
 </body>
 
