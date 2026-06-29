@@ -4,15 +4,19 @@ require_once(__DIR__ . "/../../../../lib/db.php"); ?>
 <?php
 $db = getDB();
 
-/* Refer to the HTML table below and build a query that'll select the columns in the same order as the table from the Todo table.
-Cross-reference the HTML table columns with what'd most plausibly match the SQL table aside from the notes below.
-For the completed date you'll need to extract the date portion from the completed column.
-For the Status part, you'll need to calculate the "days_offset" from the completed date, ensure the virtual column matches "days_offset".
-Filter the results where the todo item is completed and order the results by most recently completed and most recently due.
-No limit is required.
-*/
-$query = ""; // edit this
+// mm3275 2026-06-29
+// Plan: fetch only completed todos, extract completed date, calculate days offset, and order newest completed first.
+
+$query = "SELECT id, task, due,
+          DATE(completed) AS completed_date,
+          DATEDIFF(DATE(completed), due) AS days_offset,
+          assigned
+          FROM M4_Todos
+          WHERE is_complete = 1
+          ORDER BY completed DESC, due DESC";
+
 $results = [];
+
 try {
     $stmt = $db->prepare($query);
     $r = $stmt->execute();
@@ -21,7 +25,7 @@ try {
     }
 } catch (PDOException $e) {
     echo "Error fetching completed todos; check the logs (terminal)";
-    error_log("Select Error: " . var_export($e, true)); // shows in the terminal
+    error_log("Select Error: " . var_export($e, true));
 }
 ?>
 <html>
@@ -51,7 +55,6 @@ try {
                                 <?php else: ?>
                                     <td><?php echo "Overdue by " . abs($val) . " day(s)"; ?></td>
                                 <?php endif; ?>
-
                             <?php else: ?>
                                 <td><?php echo htmlspecialchars((string)$val, ENT_QUOTES, 'UTF-8'); ?></td>
                             <?php endif; ?>
